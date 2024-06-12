@@ -22,11 +22,7 @@ connection.connect((err) => {
         console.log(err);
     }
     console.log('connected successfully');
-})
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+}) 
 
 //start server
 app.listen(PORT, () => {
