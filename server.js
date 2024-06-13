@@ -3,10 +3,11 @@ const path = require('path');
 const app = express();
 const mysql = require('mysql2'); 
 const PORT = 3000;
+const cors = require('cors');
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-
+app.use(express.json()); 
+app.use(cors());
 //create connection
 const connection = mysql.createConnection({
     host: 'localhost',
