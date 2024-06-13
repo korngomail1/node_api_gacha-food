@@ -1,12 +1,11 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const mysql = require('mysql2');
-const { connect } = require('http2');
+const mysql = require('mysql2'); 
 const PORT = 3000;
-
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 
 //create connection
 const connection = mysql.createConnection({
@@ -20,9 +19,24 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
     if (err) {
         console.log(err);
+    }else{
+        console.log('connected successfully');
     }
-    console.log('connected successfully');
-}) 
+    
+})
+
+app.get('/api/fillter', (req, res) => {
+    const query = 'SELECT * FROM material ';
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(results);
+        }
+    });
+})
+
 
 //start server
 app.listen(PORT, () => {
