@@ -33,7 +33,11 @@ app.get('/api/fillter', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.json(results);
+            const data = {
+                meat: results.filter(item => item.type === 'meat'),
+                vegetable: results.filter(item => item.type === 'vegetable')
+            };
+            res.status(200).json(data);
         }
     });
 })
